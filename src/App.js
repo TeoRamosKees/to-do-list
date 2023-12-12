@@ -1,7 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
+import { useState } from "react";
 
 function App() {
+  const [task, setTask] = useState("");
+  const [taskList, setTaskList] = useState([]);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -17,6 +21,12 @@ function App() {
         >
           Learn React
         </a>
+        <label>
+          Task: <input className="input" value={task} onChange={e => setTask(e.target.value)}/>
+        </label>
+        <button className="button" onClick={() => setTaskList([...taskList, task])}>Add</button>
+        {task !== '' && <p>Your task is {task}.</p>}
+          
       </header>
     </div>
   );
