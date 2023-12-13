@@ -1,10 +1,17 @@
 import './App.css';
 import { useState } from "react";
+import Task from './components/Task';
+import AddTask from './components/AddTask';
 
 function App() {
   const [task, setTask] = useState("");
   const [taskList, setTaskList] = useState([]);
 
+  const handleAddTask = () => {
+    setTaskList([...taskList, { text: task, completed: false }]);
+    setTask("");
+  }
+  
   const deleteTask = (index) => {
     const newTaskList = [...taskList];
     newTaskList.splice(index, 1);
@@ -17,35 +24,28 @@ function App() {
     setTaskList(newTaskList);
   }
 
+  const editTask = (index) => {
+    const newTaskList = [...taskList];
+    newTaskList[index].text = task;
+    setTaskList(newTaskList);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        
-        <label>
-          Task: <input className="input" value={task} onChange={e => setTask(e.target.value)}/>
-        </label>
+        <h1>To Do List</h1>
+        <AddTask task={task} setTask={setTask} handleAddTask={handleAddTask}/>
+
         {/* Whenever a task is added, the completed property is also added to the task in the */}
-        <button className="button" onClick={() => setTaskList([...taskList, { text: task, completed: false }])}> 
-          Add
-        </button>
-        
-        <p>
+
+        <div className='tasksContainer'>
           {taskList.map((task, index) =>
               <ul key={index}>
-                  <input 
-                    type="checkbox" 
-                    checked={task.completed} 
-                    onChange={() => toggleCompleted(index)}
-                  /> 
-                  <span style={{ textDecoration: task.completed ? 'line-through' : 'none' }}>
-                    {task.text}
-                  </span>
-                  <button onClick={() => deleteTask(index)}>
-                    Delete
-                  </button>
+                <Task index={index} task={task} toggleCompleted={toggleCompleted} deleteTask={deleteTask} editTask={editTask}/>
               </ul>
           )}
-        </p>
+        </div>
+        
       </header>
     </div>
   );
