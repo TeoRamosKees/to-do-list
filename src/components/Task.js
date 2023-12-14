@@ -8,11 +8,9 @@ function Task(props){
                 checked={props.task.completed} 
                 onChange={() => props.toggleCompleted(props.index)}
             /> 
-            <input 
-                style={{ textDecoration: props.task.completed ? 'line-through' : 'none' }} 
-                className="input" value={props.task.text} 
-                onChange={e => props.editTask(props.index, e.target.value)}
-            />
+            <span style={{ textDecoration: props.task.completed ? 'line-through' : 'none' }}> 
+                {props.task.text} 
+            </span>
             <div className='container'>
                 <img 
                 src='trashCanLogo.png' 
@@ -25,7 +23,7 @@ function Task(props){
                 <img 
                 src="pencil-edit-button.svg"
                 alt="edit button"
-                onClick={() => props.editTask(props.index)}
+                onClick={() => props.setShowEdit(true)}
                 width="25px"
                 />
             </div>

@@ -2,14 +2,23 @@ import './App.css';
 import { useState } from "react";
 import Task from './components/Task';
 import AddTask from './components/AddTask';
+import EditTask from './components/EditTask'
+
 
 function App() {
   const [task, setTask] = useState("");
   const [taskList, setTaskList] = useState([]);
+  const [taskText, setTaskText] = useState(''); //this is the text that will be displayed in the input field when the edit button is clicked
+  const [showEdit, setShowEdit] = useState(false);
 
   const handleAddTask = () => {
     setTaskList([...taskList, { text: task, completed: false }]);
     setTask("");
+  }
+
+  const handleEditTask = () => {
+    setShowEdit(false);
+    setTaskTextToList();
   }
   
   const deleteTask = (index) => {
@@ -24,10 +33,23 @@ function App() {
     setTaskList(newTaskList);
   }
 
+  const getTaskText = (index) => {
+
+    return taskText;
+  }
+
+  const setTaskTextToList = (index) => {
+    const newTaskList = [...taskList];
+    newTaskList[index].text = taskText;
+    setTaskList(newTaskList);
+  }
+
   const editTask = (index) => {
     const newTaskList = [...taskList];
-    newTaskList[index].text = task;
+    newTaskList[index].text = taskText;
+    setTaskText('');
     setTaskList(newTaskList);
+    setShowEdit(false);
   }
 
   return (
@@ -41,11 +63,17 @@ function App() {
         <div className='tasksContainer'>
           {taskList.map((task, index) =>
               <ul key={index}>
-                <Task index={index} task={task} toggleCompleted={toggleCompleted} deleteTask={deleteTask} editTask={editTask}/>
+                { !showEdit && (
+                  <Task index={index} task={task} toggleCompleted={toggleCompleted} deleteTask={deleteTask} setShowEdit={setShowEdit}/>
+                  )
+                }                
+                {showEdit && (
+                    <EditTask index={index} taskText={taskText} getTaskText={getTaskText} setTaskText={setTaskText} editTask={editTask} handleEditTask={handleEditTask}/>
+                  )
+                }
               </ul>
           )}
         </div>
-        
       </header>
     </div>
   );
