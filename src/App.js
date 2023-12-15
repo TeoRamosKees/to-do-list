@@ -55,23 +55,37 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>To Do List</h1>
-        <AddTask task={task} setTask={setTask} handleAddTask={handleAddTask}/>
+        <AddTask 
+          task={task} 
+          setTask={setTask} 
+          handleAddTask={handleAddTask}
+        />
 
         {/* Whenever a task is added, the completed property is also added to the task in the */}
 
         <div className='tasksContainer'>
           {taskList.map((task, index) =>
               <ul key={index}>
-                  <Task index={index} task={task} toggleCompleted={toggleCompleted} deleteTask={deleteTask} setEditWithIndex={setEditWithIndex}/>                
+                  <Task 
+                    index={index} 
+                    task={task} 
+                    toggleCompleted={toggleCompleted} 
+                    deleteTask={deleteTask} 
+                    setEditWithIndex={setEditWithIndex}
+                  />                
               </ul>
           )}
         </div>
-        <div>
-          {showEdit && (
-            <EditTask taskText={taskText} getTaskText={getTaskText} setTaskText={setTaskText} handleEditTask={handleEditTask}/>
-            )
-          }
-        </div>
+        {showEdit && (
+          <div className='overlay'>
+            <div className="edit-task-container">
+              <EditTask 
+                getTaskText={getTaskText} 
+                setTaskText={setTaskText} 
+                handleEditTask={handleEditTask}/>
+            </div>
+          </div>
+        )}
       </header>
     </div>
   );
