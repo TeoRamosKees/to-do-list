@@ -54,7 +54,6 @@ function App() {
   const setEditWithIndex = (index) => {
     setEditIndex(index);
     setShowEdit(true);
-    setTaskText(taskList[editIndex].text);
   }
 
   return (
