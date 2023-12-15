@@ -21,6 +21,10 @@ function App() {
     setShowEdit(false);
     setTaskTextToList();
   }
+
+  const handleCancelEdit = () => {
+    setShowEdit(false);
+  }
   
   const deleteTask = (index) => {
     const newTaskList = [...taskList];
@@ -82,7 +86,9 @@ function App() {
               <EditTask 
                 getTaskText={getTaskText} 
                 setTaskText={setTaskText} 
-                handleEditTask={handleEditTask}/>
+                handleEditTask={handleEditTask}
+                handleCancelEdit={handleCancelEdit}
+              />  
             </div>
           </div>
         )}

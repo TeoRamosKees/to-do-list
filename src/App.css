@@ -1,3 +1,14 @@
+*{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+input{
+  border-radius: 5px;
+  border-style: none;
+  padding: 5px;
+  margin: 10px;
+}
+
 .App {
   text-align: center;
 }
@@ -56,12 +67,22 @@
   border-color: #1f2020;
 }
 
-.App-header button, img{
+.App-header img{
   transition: 0.3s;  
 }
 
+.App-header button{
+  background-color: #5d6370;
+  color: white;
+  border-style: none;
+  transition: 0.15s;
+  border-radius: 10px;
+  margin: 5px;
+}
+
 .App-header button:hover{
-  transform: scale(1.2);
+  background-color: #1f2020;
+  color: white;
 }
 .App-header img:hover{
   transform: scale(1.2);
@@ -96,4 +117,10 @@
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.edit-task-container input {
+  border-color: #1f2020;
+  border-style: solid;
+  border-radius: 15px;
 }
