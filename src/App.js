@@ -41,7 +41,7 @@ function App() {
   }
 
   const getTaskText = () => {
-    return taskText;
+    return taskList[editIndex].text;
   }
 
   const setTaskTextToList = () => {
