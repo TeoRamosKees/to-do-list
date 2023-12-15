@@ -23,7 +23,7 @@ function Task(props){
                 <img 
                 src="pencil-edit-button.svg"
                 alt="edit button"
-                onClick={() => props.setShowEdit(true)}
+                onClick={() => props.setEditWithIndex(props.index)}
                 width="25px"
                 />
             </div>

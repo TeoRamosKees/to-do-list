@@ -10,6 +10,7 @@ function App() {
   const [taskList, setTaskList] = useState([]);
   const [taskText, setTaskText] = useState(''); //this is the text that will be displayed in the input field when the edit button is clicked
   const [showEdit, setShowEdit] = useState(false);
+  const [editIndex, setEditIndex] = useState(null);
 
   const handleAddTask = () => {
     setTaskList([...taskList, { text: task, completed: false }]);
@@ -33,23 +34,21 @@ function App() {
     setTaskList(newTaskList);
   }
 
-  const getTaskText = (index) => {
-
+  const getTaskText = () => {
     return taskText;
   }
 
-  const setTaskTextToList = (index) => {
+  const setTaskTextToList = () => {
     const newTaskList = [...taskList];
-    newTaskList[index].text = taskText;
+    newTaskList[editIndex].text = taskText;
+    setTaskText('');
     setTaskList(newTaskList);
   }
 
-  const editTask = (index) => {
-    const newTaskList = [...taskList];
-    newTaskList[index].text = taskText;
-    setTaskText('');
-    setTaskList(newTaskList);
-    setShowEdit(false);
+  const setEditWithIndex = (index) => {
+    setEditIndex(index);
+    setShowEdit(true);
+    setTaskText(taskList[editIndex].text);
   }
 
   return (
@@ -63,16 +62,15 @@ function App() {
         <div className='tasksContainer'>
           {taskList.map((task, index) =>
               <ul key={index}>
-                { !showEdit && (
-                  <Task index={index} task={task} toggleCompleted={toggleCompleted} deleteTask={deleteTask} setShowEdit={setShowEdit}/>
-                  )
-                }                
-                {showEdit && (
-                    <EditTask index={index} taskText={taskText} getTaskText={getTaskText} setTaskText={setTaskText} editTask={editTask} handleEditTask={handleEditTask}/>
-                  )
-                }
+                  <Task index={index} task={task} toggleCompleted={toggleCompleted} deleteTask={deleteTask} setEditWithIndex={setEditWithIndex}/>                
               </ul>
           )}
+        </div>
+        <div>
+          {showEdit && (
+            <EditTask taskText={taskText} getTaskText={getTaskText} setTaskText={setTaskText} handleEditTask={handleEditTask}/>
+            )
+          }
         </div>
       </header>
     </div>
