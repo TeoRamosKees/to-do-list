@@ -81,7 +81,7 @@ input{
 }
 
 .App-header button:hover{
-  background-color: #1f2020;
+  background-color: #000000;
   color: white;
 }
 .App-header img:hover{
@@ -123,4 +123,45 @@ input{
   border-color: #1f2020;
   border-style: solid;
   border-radius: 15px;
+}
+
+/* Hide default checkbox */
+input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.checkbox-track {
+  position: relative;
+  width: 50px;
+  height: 26px;
+  background-color: rgb(17, 223, 17);
+  border-radius: 13px;
+  margin-right: 10px;
+}
+
+.checkbox-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 22px;
+  height: 22px;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Move the thumb to the right when the checkbox is checked */
+input[type="checkbox"]:checked + .checkbox-track .checkbox-thumb {
+  transform: translateX(24px);
+}
+input[type="checkbox"]:checked + .checkbox-track {
+  background-color: rgb(241, 26, 26);
 }

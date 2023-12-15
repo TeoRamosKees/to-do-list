@@ -3,14 +3,17 @@
 function Task(props){
     return (
         <div className='container'>
-            <input 
-                type="checkbox" 
-                checked={props.task.completed} 
-                onChange={() => props.toggleCompleted(props.index)}
-            /> 
-            <span style={{ textDecoration: props.task.completed ? 'line-through' : 'none' }}> 
-                {props.task.text} 
-            </span>
+            <label className="checkbox-container" style={{ textDecoration: props.task.completed ? 'line-through' : 'none' }}>
+                <input 
+                    type="checkbox" 
+                    checked={props.task.completed} 
+                    onChange={() => props.toggleCompleted(props.index)}
+                />
+                <div className="checkbox-track">
+                    <div className="checkbox-thumb"></div>
+                </div>
+                {props.task.text}
+            </label>
             <div className='container'>
                 <img 
                 src='trashCanLogo.png' 

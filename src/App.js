@@ -13,8 +13,10 @@ function App() {
   const [editIndex, setEditIndex] = useState(null);
 
   const handleAddTask = () => {
-    setTaskList([...taskList, { text: task, completed: false }]);
-    setTask("");
+    if (task !== "") {
+      setTaskList([...taskList, { text: task, completed: false }]);
+      setTask("");
+    }
   }
 
   const handleEditTask = () => {
