@@ -1,16 +1,30 @@
 import './App.css';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Task from './components/Task';
 import AddTask from './components/AddTask';
 import EditTask from './components/EditTask'
 
 
 function App() {
+  
+  const tasksStored = JSON.parse(localStorage.getItem("taskList"));
+
   const [task, setTask] = useState("");
-  const [taskList, setTaskList] = useState([]);
+  const [taskList, setTaskList] = useState(tasksStored || []);
   const [taskText, setTaskText] = useState(''); //this is the text that will be displayed in the input field when the edit button is clicked
   const [showEdit, setShowEdit] = useState(false);
   const [editIndex, setEditIndex] = useState(null);
+
+
+  useEffect(() => {
+    //Sorting tasks by completed property
+    const sortedList = [...taskList].sort((a, b) => a.completed - b.completed);
+    setTaskList(sortedList);
+
+    //Storing tasks in local storage
+    localStorage.setItem("taskList", JSON.stringify(taskList));
+
+  }, [taskList]);
 
   const handleAddTask = () => {
     if (task !== "") {
@@ -47,7 +61,6 @@ function App() {
   const setTaskTextToList = () => {
     const newTaskList = [...taskList];
     newTaskList[editIndex].text = taskText;
-    setTaskText('');
     setTaskList(newTaskList);
   }
 
